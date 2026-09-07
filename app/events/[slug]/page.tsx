@@ -51,7 +51,7 @@ export const EventTagItem = ({ tags }: { tags: string[] }) =>
       {tags.map((tag) => (
         <li key={tag}>
           {' '}
-          <span className="px-6 py-2 rounded-2xl border border-white/[0.48]">
+          <span className="px-6 py-2 rounded-4xl border border-white/[0.48]">
             {tag}
           </span>
         </li>

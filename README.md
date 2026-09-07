@@ -1,36 +1,50 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## Full-stack Event Management App (Next.js + TailwindCSS)
 
-## Getting Started
+A full-stack event management starter built with Next.js 16, MongoDB, and Cloudinary. Browse, book, and discover developer events — hackathons, meetups, and conferences — all in one place.
 
-First, run the development server:
+## Stack
 
-```bash
+Framework - Next.js 16 (App Router, Turbopack, Cache Components)
+Language - TypeScript
+Styling - Tailwind CSS v4
+Database - MongoDB via Mongoose
+Media - Cloudinary
+Analytics - Posthog
+
+## Features
+
+Browse developer events with a responsive, accessible UI (WCAG 2.0 AA)
+Event detail pages with agenda, tags, organizer info, and similar-event recommendations
+Event registration via a booking form with duplicate-entry protection
+Image uploads handled through Cloudinary
+Server-side data caching (use cache) with per-function cache lifetimes
+Streaming UI via React Suspense with custom loading and not-found states
+PostHog analytics integration
+
+## Updates
+
+Future updates: Create new events and authentication.
+
+## Project Structure
+
+app/
+page.tsx # Home - event listing
+events/[slug]/ # Event details, loading, not-found
+api/events/ # REST routes (POST with Cloudinary upload, GET)
+api/events/[slug]/ # GET by slug
+components/ # EventCard, BookingForm, carousels, etc.
+database/ # Mongoose schemas (Event, Booking)
+lib/
+actions/ # Server Actions & cached data functions
+mongodb.ts # Connection singleton
+scripts/ # Seed & one-off data-fix scripts
+
+## Getting started
+
+git clone https://github.com/ali-shahshank/event-management-app-react-next.js
+cd event-management-app-next.js
+npm install
+
+crate .env.local
+
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
