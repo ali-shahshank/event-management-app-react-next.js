@@ -5,7 +5,7 @@ import './globals.css';
 import { cn } from '@/lib/utils';
 import LightRays from '@/components/LightRays';
 import Navbar from '@/components/Navbar';
-import GlobalFallback from '@/components/GlobalFallback';
+import Loading from './loading';
 
 const geist = Geist({ subsets: ['latin'], variable: '--font-sans' });
 
@@ -61,7 +61,7 @@ export default function RootLayout({
         </div>
         <Navbar />
         <main>
-          <Suspense fallback={<GlobalFallback />}>{children}</Suspense>
+          <Suspense fallback={<Loading />}>{children}</Suspense>
         </main>
       </body>
     </html>

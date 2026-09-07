@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-export default function EventNotFound() {
+export default function NotFound() {
   return (
     <main className="flex flex-col items-center justify-center text-center min-h-[60vh] gap-4">
       <p className="text-6xl">🎪</p>

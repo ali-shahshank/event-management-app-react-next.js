@@ -1,4 +1,4 @@
-export default function GlobalFallback() {
+export default function Loading() {
   return (
     <div className="flex flex-col items-center justify-center min-h-[50vh] gap-3 text-center">
       <p className="text-4xl animate-bounce">⚡</p>

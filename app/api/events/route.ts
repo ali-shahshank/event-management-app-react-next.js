@@ -71,6 +71,7 @@ export async function POST(req: NextRequest) {
         { status: 400 },
       );
     }
+
     if (file.size > MAX_IMAGE_SIZE) {
       return NextResponse.json(
         { message: 'Image exceeds 5MB limit' },
