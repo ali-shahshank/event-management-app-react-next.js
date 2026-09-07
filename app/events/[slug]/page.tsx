@@ -47,9 +47,14 @@ export const EventAgendaItem = ({ agendaItems }: { agendaItems: string[] }) => {
 // Event tags component
 export const EventTagItem = ({ tags }: { tags: string[] }) =>
   tags.length > 0 ? (
-    <ul>
+    <ul className="flex gap-2 list-none">
       {tags.map((tag) => (
-        <li key={tag}>{tag}</li>
+        <li key={tag}>
+          {' '}
+          <span className="px-6 py-2 rounded-2xl border border-white/[0.48]">
+            {tag}
+          </span>
+        </li>
       ))}
     </ul>
   ) : null;
