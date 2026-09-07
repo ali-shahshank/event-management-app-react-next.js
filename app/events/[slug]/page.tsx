@@ -99,7 +99,7 @@ async function EventDetailsContent({
           width={560}
         />
         <aside>
-          <BookingForm />
+          <BookingForm eventId={String(event._id)} />
         </aside>
       </section>
       <div>
