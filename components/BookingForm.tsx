@@ -38,29 +38,44 @@ const BookingForm = ({ eventId }: { eventId: string }) => {
   }
 
   return (
-    <div id="book-event">
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="email">Email:</label>
-        <input
-          type="email"
-          id="email"
-          placeholder="Enter your email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-          disabled={status === 'submitting'}
-        />
+    <div
+      id="book-event"
+      className="rounded-xl border border-border p-6 space-y-4 h-fit"
+    >
+      <h2 className="text-lg font-semibold">Register for this event</h2>
+      <form
+        onSubmit={handleSubmit}
+        className="space-y-4"
+      >
+        <div className="space-y-1.5">
+          <label
+            htmlFor="email"
+            className="text-sm font-medium"
+          >
+            Email
+          </label>
+          <input
+            type="email"
+            id="email"
+            placeholder="Enter your email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            disabled={status === 'submitting'}
+            className="w-full min-h-11 rounded-lg border border-border "
+          />
+        </div>
         <button
           type="submit"
-          className="button-submit"
           disabled={status === 'submitting'}
+          className="w-full min-h-11 rounded-lg"
         >
           {status === 'submitting' ? 'Submitting...' : 'Submit'}
         </button>
         {status === 'error' && (
           <p
             role="alert"
-            className="text-red-500 text-sm mt-2"
+            className="text-red-500 text-sm"
           >
             {errorMessage}
           </p>

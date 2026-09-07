@@ -5,8 +5,8 @@ import Image from 'next/image';
 import BookingForm from '@/components/BookingForm';
 import { getSimilarEventsBySlug } from '@/lib/actions/event.actions';
 import { getEventBySlug } from '@/lib/actions/getEventBySlug';
-import EventCard from '@/components/EventCard';
 import Loading from './loading';
+import SimilarEventsCarousel from '@/components/SimilarEvents';
 
 // Event details component
 const EventDetailItem = ({
@@ -19,7 +19,7 @@ const EventDetailItem = ({
   label: string;
 }) => {
   return (
-    <div className="flex gap-2 items-center">
+    <div className="flex gap-2 items-center mb-1">
       <Image
         src={icon}
         alt={alt}
@@ -86,83 +86,91 @@ async function EventDetailsContent({
   const similarEvents: IEvent[] = await getSimilarEventsBySlug(slug);
 
   return (
-    <main>
-      <div>
-        <h3>Event Description</h3>
-        <p>{description}</p>
-      </div>
-      <section className="flex">
-        <Image
-          src={image}
-          alt="Event Image"
-          height={460}
-          width={560}
-        />
-        <aside>
-          <BookingForm eventId={String(event._id)} />
-        </aside>
-      </section>
-      <div>
-        <section className="my-4">
-          <h4 className="text-lg font-semibold">Event Overview</h4>
-          <p>{overview}</p>
+    <>
+      {/* Header */}
+      <div className="space-y-10">
+        <section className="flex flex-col space-y-8">
+          <div>
+            <h1 className="text-[40px] leading-tight font-medium">
+              {event.title}
+            </h1>
+            <p className="text-[20px]">{description}</p>
+          </div>
+          <div className="relative w-full h-[360px]">
+            <Image
+              src={image}
+              alt={`${event.title} event banner`}
+              fill
+              priority
+              className="object-cover rounded-[16px]"
+            />
+          </div>
         </section>
-        <section className="mb-4">
-          <h4 className="text-lg font-semibold">Event Details</h4>
-          <EventDetailItem
-            icon="/icons/calendar.svg"
-            alt="Calendar Icon"
-            label={date}
-          />
-          <EventDetailItem
-            icon="/icons/clock.svg"
-            alt="Clock Icon"
-            label={time}
-          />
-          <EventDetailItem
-            icon="/icons/pin.svg"
-            alt="Pin Icon"
-            label={location}
-          />
-          <EventDetailItem
-            icon="/icons/mode.svg"
-            alt="Mode Icon"
-            label={mode}
-          />
-          <EventDetailItem
-            icon="/icons/audience.svg"
-            alt="Audience Icon"
-            label={audience}
-          />
+        {/* Event Overview */}
+        <section className="flex flex-col">
+          <h2 className="text-[20px] text-secondary font-medium">
+            Event Overview
+          </h2>
+          <p className="text-muted-foreground">{overview}</p>
         </section>
-        {/* Event Agenda */}
-        <section className="mb-4">
-          <h4 className="text-lg font-semibold">Event Agenda</h4>
-          <EventAgendaItem agendaItems={agenda} />
-        </section>
+        {/* Event details, agenda and bookings */}
+        <div className="flex flex-col lg:flex-row gap-8 justify-between align-middle">
+          <div className="lg:w-2/3 space-y-10">
+            {/* Event Details */}
+            <section className="flex flex-col">
+              <h4 className="text-lg font-medium mb-4">Event Details</h4>
+              <EventDetailItem
+                icon="/icons/calendar.svg"
+                alt="Calendar Icon"
+                label={date}
+              />
+              <EventDetailItem
+                icon="/icons/clock.svg"
+                alt="Clock Icon"
+                label={time}
+              />
+              <EventDetailItem
+                icon="/icons/pin.svg"
+                alt="Pin Icon"
+                label={location}
+              />
+              <EventDetailItem
+                icon="/icons/mode.svg"
+                alt="Mode Icon"
+                label={mode}
+              />
+              <EventDetailItem
+                icon="/icons/audience.svg"
+                alt="Audience Icon"
+                label={audience}
+              />
+            </section>
+            {/* Agenda */}
+            <section className="flex flex-col">
+              <h4 className="text-lg font-medium mb-4">Agenda</h4>
+              <EventAgendaItem agendaItems={agenda} />
+            </section>
+          </div>
+          <div className="lg:w-1/3">
+            <BookingForm eventId={String(event._id)} />
+          </div>
+        </div>
         {/* Organizer */}
         <section>
-          <h4 className="text-lg font-semibold">About the Organizer</h4>
+          <h4 className="text-lg font-medium mb-4">About The Organizer</h4>
           <p>{organizer}</p>
         </section>
         {/* Tags */}
         <section>
           <EventTagItem tags={tags} />
         </section>
+        {/* Similar Events */}
+        <section>
+          <h4 className="text-lg font-medium mb-4">Similar Events</h4>
+          <SimilarEventsCarousel events={similarEvents} />
+        </section>
       </div>
-      {/* Similar Events */}
-      <section>
-        <h2 className="text-lg font-semibold">Similar Events</h2>
-        <div className="events">
-          {similarEvents.map((similarEvent: IEvent) => (
-            <EventCard
-              key={String(similarEvent._id)}
-              {...similarEvent}
-            />
-          ))}
-        </div>
-      </section>
-    </main>
+    </>
   );
 }
 
