@@ -95,7 +95,7 @@ flowchart TD
 ## Getting Started
 
 ```bash
-git clone <repo-url>
+git clone https://github.com/ali-shahshank/event-management-app-react-next.js
 cd event-management-app-next.js
 npm install
 ```
