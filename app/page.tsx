@@ -16,7 +16,7 @@ const Home = async () => {
           id="hero-heading"
           className="text-3xl sm:text-4xl lg:text-5xl font-bold"
         >
-          Event Booking Platform
+          Book Your Next Big Event
         </h1>
         <p className="mt-4 sm:mt-5 max-w-2xl text-base sm:text-lg text-muted-foreground">
           Hackathons, meetups and conferences all in one place.
