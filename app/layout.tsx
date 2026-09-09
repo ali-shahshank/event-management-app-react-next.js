@@ -5,7 +5,8 @@ import './globals.css';
 import { cn } from '@/lib/utils';
 import LightRays from '@/components/LightRays';
 import Navbar from '@/components/Navbar';
-import Loading from './loading';
+import GlobalFallback from '@/components/GlobalFallback';
+import { WebVitals } from '@/components/WebVitals';
 
 const geist = Geist({ subsets: ['latin'], variable: '--font-sans' });
 
@@ -42,6 +43,7 @@ export default function RootLayout({
       )}
     >
       <body className="min-h-full flex flex-col">
+        <WebVitals />
         <div className="absolute inset-0 top-0 z-[-1] min-h-screen">
           <LightRays
             raysOrigin="top-center-offset"
@@ -61,7 +63,7 @@ export default function RootLayout({
         </div>
         <Navbar />
         <main>
-          <Suspense fallback={<Loading />}>{children}</Suspense>
+          <Suspense fallback={<GlobalFallback />}>{children}</Suspense>
         </main>
       </body>
     </html>
