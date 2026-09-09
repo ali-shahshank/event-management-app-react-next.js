@@ -17,7 +17,7 @@ const Navbar = () => {
           />
           <p>DevEvent</p>
         </Link>
-        <ul>
+        <ul className="list-none">
           <li>
             <Link href={'/'}>Home</Link>
           </li>
