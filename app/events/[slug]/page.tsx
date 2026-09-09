@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import { Suspense } from 'react';
 import { notFound } from 'next/navigation';
 import { IEvent } from '@/database';
@@ -7,6 +8,38 @@ import { getSimilarEventsBySlug } from '@/lib/actions/event.actions';
 import { getEventBySlug } from '@/lib/actions/getEventBySlug';
 import Loading from './loading';
 import SimilarEventsCarousel from '@/components/SimilarEvents';
+
+// Event Metadata
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const event = await getEventBySlug(slug);
+
+  if (!event) {
+    return { title: 'Event not found | DevEvent' };
+  }
+
+  const description = event.overview || event.description;
+
+  return {
+    title: `${event.title} | DevEvent`,
+    description,
+    openGraph: {
+      title: event.title,
+      description,
+      images: [{ url: event.image }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: event.title,
+      description,
+      images: [event.image],
+    },
+  };
+}
 
 // Event details component
 const EventDetailItem = ({
