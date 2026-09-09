@@ -27,6 +27,13 @@ const Home = async () => {
         </div>
 
         <div className="mt-12 sm:mt-16 lg:mt-20 w-full space-y-6 sm:space-y-7">
+          <h2
+            id="events-heading"
+            className="mb-4 text-xl sm:text-2xl font-semibold text-left sm:text-center"
+          >
+            Featured Events
+          </h2>
+
           {events && events.length > 0 ? (
             <ul
               role="list"
