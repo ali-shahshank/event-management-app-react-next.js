@@ -27,17 +27,6 @@ export async function generateMetadata({
   return {
     title: `${event.title} | DevEvent`,
     description,
-    openGraph: {
-      title: event.title,
-      description,
-      images: [{ url: event.image }],
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: event.title,
-      description,
-      images: [event.image],
-    },
   };
 }
 
@@ -92,8 +81,6 @@ export const EventTagItem = ({ tags }: { tags: string[] }) =>
     </ul>
   ) : null;
 
-// All params/data access lives here, inside <Suspense> — this is what
-// lets the page shell prerender immediately while this streams in.
 async function EventDetailsContent({
   params,
 }: {
@@ -102,7 +89,6 @@ async function EventDetailsContent({
   const { slug } = await params;
   const event = await getEventBySlug(slug);
 
-  // Triggers the route's not-found.tsx convention file
   if (!event) {
     notFound();
   }
