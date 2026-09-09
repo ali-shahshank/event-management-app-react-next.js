@@ -20,7 +20,7 @@ const EventCard = ({ image, title, slug, location, date, time }: props) => {
       <Link
         className="event-card group flex h-full flex-col gap-3 rounded-lg transition-shadow duration-200 ease-out hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary motion-reduce:transition-none"
         href={`/events/${slug}`}
-        aria-label={`View event: ${title}, ${date} at ${time}, ${location}`}
+        aria-label={`View event: ${title}, ${date} at ${formatTime(time)}, ${location}`}
         onClick={() =>
           posthog.capture('event_details_opened', {
             event_slug: slug,
